@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vegetacion Esfuerzo | Walsh Peru</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Formulario "Vegetacion 2018 - Esfuerzo de Muestreo"</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Formularios</a></li>
+                            <li class="breadcrumb-item active">Esfuerzo de Muestreo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Departamento / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr size="2px" style="color: #000000;"/>
+
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <!-- /.card -->
+                <div class="row">
+
+                    <!-- Prime columna 1/2-->
+                    <div class="col-md-6">
+
+                        <!-- Registro de Investigacion -->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Registro de Investigacion</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+
+                                    {# user field #}
+                                    <input
+                                            class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                            type="hidden"
+                                            name="user"
+                                            value="{{request.user.id}}"/>
+                                    <div class="invalid-feedback">
+                                        {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                    </div>
+
+                                    <label>Estacion de Muestreo / Unidad de Muestreo:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vials"></i></span>
+                                            </div>
+
+                                            {# estacion_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.estacion_muestreo.errors %}is-invalid{% endif %}"
+                                                   name="estacion_muestreo"
+                                                   style="text-transform:uppercase;"
+                                                   placeholder="Esp. Dominante">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.estacion_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                            </div>
+
+                                            {# unidad_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_muestreo.errors %}is-invalid{% endif %}"
+                                                   name="unidad_muestreo"
+                                                   placeholder="U. Muestreo">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Esfuerzo del Muestreo / Unidad de esfuerzo de muestreo:</label>
+
+                                    <div class="row">
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-accusoft"></i></span>
+                                            </div>
+
+                                            {# esfuerzo_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.esfuerzo_muestreo.errors %}is-invalid{% endif %}"
+                                                   name="esfuerzo_muestreo"
+                                                   placeholder="Esf. Muestreo">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.esfuerzo_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                            </div>
+
+                                            {# unidad_esfuerzo_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_esfuerzo_muestreo.errors %}is-invalid{% endif %}"
+                                                   name="unidad_esfuerzo_muestreo"
+                                                   placeholder="U. Esf. Mues.">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_esfuerzo_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tamaño de la Unidad:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                        </div>
+
+                                        {# tamaño_unidad_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.tamaño_unidad_metros.errors %}is-invalid{% endif %}"
+                                               name="tamaño_unidad_metros"
+                                               placeholder="U. Esf. Mues.">
+                                        <div class="invalid-feedback">
+                                            {% for error in form.tamaño_unidad_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Registro de Investigacion -->
+
+                    </div>
+                    <!-- /Prime columna 1/2 -->
+
+                    <!-- Prime columna 2/2-->
+                    <div class="col-md-6">
+
+                        <!-- Card Datos de Entorno-->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Entorno</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Codigo de Proyecto / Fecha:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-pagelines"></i></span>
+                                            </div>
+
+                                            {# codigo_proyecto field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.codigo_proyecto.errors %}is-invalid{% endif %}"
+                                                   name="codigo_proyecto"
+                                                   style="text-transform: uppercase"
+                                                   placeholder="#">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.codigo_proyecto.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="input-group date col-md-6" id="reservationdate" data-target-input="nearest">
+                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+
+                                            {# fecha field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.fecha.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   data-target="#reservationdate"
+                                                   name="fecha"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.fecha.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Temporada de Evalucion:</label>
+
+                                    {# temporada field #}
+                                    <select class="custom-select rounded-0"
+                                            id="exampleSelectRounded0"
+                                            name="temporada">
+                                        <option value="-">Seleccionar</option>
+                                        <option value="Seca">Seca</option>
+                                        <option value="Humedo">Humedo</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Unidad de Vegetacion:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fab fa-pagelines"></i></span>
+                                        </div>
+
+                                        {# unidad_vegetacion field #}
+                                        <input
+                                                type="text"
+                                                class="form-control {% if form.unidad_vegetacion.errors %}is-invalid{% endif %}"
+                                                name="unidad_vegetacion"
+                                                placeholder="U. Vegetacion"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.unidad_vegetacion.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Sector:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-vector-square"></i></span>
+                                        </div>
+
+                                        {# sector field #}
+                                        <input
+                                                type="text"
+                                                class="form-control {% if form.sector.errors %}is-invalid{% endif %}"
+                                                name="sector"
+                                                style="text-transform:uppercase;"
+                                                placeholder="Sector"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.sector.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Datos de Entorno -->
+
+                    </div>
+                    <!-- /Prime columna 2/2 -->
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        </form>
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walsh Peru | Login</title>
+  
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- icheck bootstrap -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+
+  <!-- Estilos Principales -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/estilos-login.css' %}">
+
+</head>
+<body class="hold-transition pagina-login" style="background-image: url({% static 'img/amazona-iquitos-peru_55cfe9cc.png' %})" >
+
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-success">
+    <div class="card-header text-center">
+      <a href="#" class="h1"><img width="100%" src="{% static 'img/logo2.0.jpg' %}" alt=""></a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg"><b>Iniciar Sesion</b></p>
+
+      <form method="POST" action="{% url "users:login" %}">
+         {% csrf_token %}
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <input type="text" class="form-control" name="username" placeholder="Usuario">
+          
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <input type="password" class="form-control" name="password" placeholder="Contraseña">
+          
+        </div>
+        <div class="row justify-content-center align-items-center">
+          
+          <!-- <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div> -->
+
+          <!-- /.col -->
+          <div class="col-6 mt-2">
+            <button style="background-color: #327d6f;" type="submit" class="btn btn-success btn-block">Iniciar sesion</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <!-- /.social-auth-links -->
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="js/adminlte.min.js"></script>
+ {% endblock %}
+
+</body>
+</html>

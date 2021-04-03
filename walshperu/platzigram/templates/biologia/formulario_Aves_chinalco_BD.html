@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aves Chinalco | Walsh Perú</title>
+
+    {% include "rel.html" %}
+</head>
+
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Formulario "Aves - Chinalco - 2018"</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Formularios</a></li>
+                            <li class="breadcrumb-item active">Aves - Chinalco</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Area / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr size="2px" style="color: #000000;"/>
+
+        <!-- Contenedor de Cartas -->
+        <section class="content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Prime columna 1/2-->
+                    <div class="col-md-6">
+
+                        <!--  Caracteristicas de Especimen-->
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Caracteristicas de Especimen</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {# user field #}
+                                        <input
+                                                class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                                type="hidden"
+                                                name="user"
+                                                value="{{request.user.id}}"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                        <label>Orden:  / Familia:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-egg"></i></span>
+                                                </div>
+
+                                                {# orden field #}
+                                                <input
+                                                        class="form-control {% if form.orden.errors %}is-invalid{% endif %}"
+                                                        type="text"
+                                                        name="orden"
+                                                        placeholder="Orden"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.orden.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-feather-alt"></i></span>
+                                                </div>
+                                                {# familia field #}
+                                                <input
+                                                        class="form-control {% if form.orden.errors %}is-invalid{% endif %}"
+                                                        type="text"
+                                                        name="familia"
+                                                        placeholder="Familia"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.familia.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Especie:</label>
+                                        <div class="input-group">
+                                            <div class="row">
+                                                <div class="input-group col-md-12">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-dove"></i></span>
+                                                    </div>
+                                                    {# especie field #}
+                                                    <input
+                                                            class="form-control {% if form.especie.errors %}is-invalid{% endif %}"
+                                                            type="text"
+                                                            autocomplete="off"
+                                                            name="especie"
+                                                            list="aveslist"
+                                                            placeholder="Especie"/>
+
+                                                    <datalist id="aveslist">
+                                                        {% for aves in datos_aves %}
+                                                        <option value="{{aves.especie}}">
+                                                        {% endfor %}
+                                                    </datalist>
+
+
+
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.especie.errors %}{{ error }}{% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-prepend">
+                                                <a type="button" class="btn btn-success" href="">Autocomplete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Nombre Comun:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# nombre_comun field #}
+                                            <input
+                                                    type="text"
+                                                    class="form-control {% if form.nombre_comun.errors %}is-invalid{% endif %}"
+                                                    name="nombre_comun"
+                                                    placeholder="Nombre Comun"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.nombre_comun.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Caracteristicas de Especimen -->
+
+                            <!-- Caracteristucas de Registro -->
+                            <div class="card card-warning">
+                                <div class="card-header">
+                                    <h3 class="card-title">Caracteristicas de Registro</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Tipo de Evaluacion:</label>
+                                        {# tipo_evaluacion field #}
+                                        <select class="custom-select rounded-0"
+                                                id="exampleSelectRounded0"
+                                                name="tipo_evaluacion">
+                                            <option value="3">-----</option>
+                                            <option value="1">Cuantitativo</option>
+                                            <option value="2">Cuanlitativo</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                <label>Registro Visual:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Registro Auditivo:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Registro por Captura:</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                {# registro_visual field #}
+                                                <input
+                                                        type="number"
+                                                        class="form-control {% if form.registro_visual.errors %}is-invalid{% endif %}"
+                                                        name="registro_visual"
+                                                        placeholder="Registro Visual"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.registro_visual.errors %}{{ error }}{% endfor %}
+                                                </div>
+
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# registro_auditivo field #}
+                                                <input
+                                                        type="number"
+                                                        class="form-control {% if form.registro_auditivo.errors %}is-invalid{% endif %}"
+                                                        name="registro_auditivo"
+                                                        placeholder="Registro Auditivo"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.registro_auditivo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# registro_captura field #}
+                                                <input type="number"
+                                                       class="form-control {% if form.registro_captura.errors %}is-invalid{% endif %}"
+                                                       name="registro_captura"
+                                                       placeholder="Registro por Captura"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.registro_captura.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                <label>Registro Casual:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>N° total de indivialismo:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Distancia al punto de contenio (m):</label>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                {# registro_casual field #}
+                                                <input type="number"
+                                                       class="form-control {% if form.registro_casual.errors %}is-invalid{% endif %}"
+                                                       name="registro_casual"
+                                                       placeholder="Registro Casual"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.registro_casual.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# numero_total_individuos field #}
+                                                <input type="number"
+                                                       class="form-control {% if form.numero_total_individuos.errors %}is-invalid{% endif %}"
+                                                       name="numero_total_individuos"
+                                                       placeholder="Numero de Individuos"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.numero_total_individuos.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# distancia_punto_conteo field #}
+                                                <input type="number"
+                                                       class="form-control {% if form.distancia_punto_conteo.errors %}is-invalid{% endif %}"
+                                                       name="distancia_punto_conteo"
+                                                       placeholder="Distancia de Punto de Conteo" />
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.distancia_punto_conteo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Observaciones (etología):</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-eye"></i></span>
+                                            </div>
+                                            {# observaciones_etologia field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.observaciones_etologia.errors %}is-invalid{% endif %}"
+                                                   name="observaciones_etologia"
+                                                   placeholder="Observaciones de Etologia"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.observaciones_etologia.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /caracteristicas de registro -->
+
+                            <!-- Otros -->
+                            <div class="card card-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title">Otros</h3>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                <label>DS O04-2014-MINAGRI:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>IUCM:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>CITES:</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                {# DS_O04_2014_MINAGRI field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.DS_O04_2014_MINAGRI.errors %}is-invalid{% endif %}"
+                                                       name="DS_O04_2014_MINAGRI"
+                                                       placeholder="DS_O04_2014_MINAGRI"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.DS_O04_2014_MINAGRI.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# iucn field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.iucn.errors %}is-invalid{% endif %}"
+                                                       name="iucn"
+                                                       placeholder="IUCN"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.iucn.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# cites field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.cites.errors %}is-invalid{% endif %}"
+                                                       name="cites"
+                                                       placeholder="CITES"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.cites.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Migratoria:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-fly"></i></span>
+                                            </div>
+                                            {# migratoria field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.migratoria.errors %}is-invalid{% endif %}"
+                                                   name="migratoria"
+                                                   placeholder="Migratoria"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.migratoria.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <label>Congregatoria:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <label>Observaciones Sobre la muestra:</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                {# congregatoria field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.congregatoria.errors %}is-invalid{% endif %}"
+                                                       name="congregatoria"
+                                                       placeholder="Congregatoria"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.congregatoria.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                {# observaciones_muestra field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.observaciones_muestra.errors %}is-invalid{% endif %}"
+                                                       name="observaciones_muestra"
+                                                       placeholder="Observaciones Muestra"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.observaciones_muestra.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Actividad Humana:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-hiking"></i></span>
+                                            </div>
+                                            {# actividad_humana field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.actividad_humana.errors %}is-invalid{% endif %}"
+                                                   name="actividad_humana"
+                                                   placeholder="Actividad Humana"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.actividad_humana.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Estado de conservacion de Habitad:</label>
+
+                                        {# estado_conservacion_habitat field #}
+                                        <select class="custom-select rounded-0"
+                                                name="estado_conservacion_habitat">
+                                            <option value="4">-----</option>
+                                            <option value="1">Impactado</option>
+                                            <option value="2">Regular</option>
+                                            <option value="3">Bueno</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                <label>Colector de Registro:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Tipo de Muestra:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Estado de la muestra:</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                {# colector_registro field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.colector_registro.errors %}is-invalid{% endif %}"
+                                                        name="colector_registro"
+                                                        placeholder="Colector de Registro"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.colector_registro.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# tipo_muestra field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.tipo_muestra.errors %}is-invalid{% endif %}"
+                                                       name="tipo_muestra"
+                                                       placeholder="Tipo de Muestra"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.tipo_muestra.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# estado_muestra field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.estado_muestra.errors %}is-invalid{% endif %}"
+                                                        name="estado_muestra"
+                                                        placeholder="Estado de Muestra"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.estado_muestra.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                <label>Tipo de prepaparion de muestra:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Codio de colecta:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                <label>Insititucion de Deposito:</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-4">
+                                                {# preparacion_muestra field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.preparacion_muestra.errors %}is-invalid{% endif %}"
+                                                       name="preparacion_muestra"
+                                                       placeholder="Tipo de Preparacion de Muestra"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.preparacion_muestra.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# codigo_colecta field #}
+                                                <input type="number"
+                                                       class="form-control {% if form.codigo_colecta.errors %}is-invalid{% endif %}"
+                                                       name="codigo_colecta"
+                                                       placeholder="Codigo de Colecta"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.codigo_colecta.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-4">
+                                                {# institucion_deposito field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.institucion_deposito.errors %}is-invalid{% endif %}"
+                                                       name="institucion_deposito"
+                                                       placeholder="Institucion de Deposito"/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.institucion_deposito.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Codigo de Fotos:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-images"></i></span>
+                                            </div>
+                                            {# codigo_fotos field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.codigo_fotos.errors %}is-invalid{% endif %}"
+                                                    name="codigo_fotos"
+                                                    placeholder="Codigo de Fotos"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.codigo_fotos.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Otros -->
+
+                    </div>
+                    <!-- /Prime columna 1/2 -->
+
+                    <!-- Prime columna 2/2-->
+                    <div class="col-md-6">
+                        <!-- Card Datos del Proyecto (1)-->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de proyecto (1)</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Fecha de Registro:</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                        {# fecha_registro field #}
+                                        <input type="text"
+                                               class="form-control {% if form.fecha_registro.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               data-target="#reservationdate"
+                                               name="fecha_registro"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.fecha_registro.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Temporada de Evaluacion:</label>
+                                    {# temporada_evaluacion field #}
+                                    <select class="custom-select rounded-0"
+                                            name="temporada_evaluacion">
+                                        <option value="4">-----</option>
+                                        <option value="1">Seco</option>
+                                        <option value="2">Humedo</option>
+                                        <option value="3">Nevado</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Unidad de Vegetacion:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fab fa-pagelines"></i></span>
+                                        </div>
+                                        {# unidad_vegetacion field #}
+                                        <input type="text"
+                                               class="form-control {% if form.unidad_vegetacion.errors %}is-invalid{% endif %}"
+                                                name="unidad_vegetacion"
+                                                placeholder="Unidad de Vegetacion"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.unidad_vegetacion.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Estacion de Muestreo:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-vials"></i></span>
+                                        </div>
+                                        {# estacion_muestreo field #}
+                                        <input type="text"
+                                               style="text-transform:uppercase;"
+                                               class="form-control {% if form.estacion_muestreo.errors %}is-invalid{% endif %}"
+                                               name="estacion_muestreo"
+                                               placeholder="Estacion de Muestreo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.estacion_muestreo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Unidad de Muestreo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        </div>
+                                        {# unidad_muestreo field#}
+                                        <input type="text"
+                                               style="text-transform:uppercase;"
+                                               class="form-control {% if form.unidad_muestreo.errors %}is-invalid{% endif %}"
+                                               name="unidad_muestreo"
+                                               placeholder="Unidad de Muestreo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Metodo de Muestreo</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fab fa-accusoft"></i></span>
+                                        </div>
+                                        {# metodo_muestreo field #}
+                                        <input type="text"
+                                               class="form-control {% if form.metodo_muestreo.errors %}is-invalid{% endif %}"
+                                                name="metodo_muestreo"
+                                                placeholder="Metodo de Muestreo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.metodo_muestreo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Peridodo del Dia: / Hora del Registro:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-sun"></i></span>
+                                            </div>
+                                            {# periodo_dia field #}
+                                            <select class="custom-select rounded-0"
+                                                    name="periodo_dia">
+                                                <option value="4">-----</option>
+                                                <option value="1">Diurno</option>
+                                                <option value="2">Tarde</option>
+                                                <option value="3">Nocturno</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                            </div>
+                                            {# hora_registro field #}
+                                            <input type="time"
+                                                   class="form-control {% if form.hora_registro.errors %}is-invalid{% endif %}"
+                                                    name="hora_registro"
+                                                    placeholder="Hora de Registro"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.hora_registro.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                Nota: ---
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Datos del Proyecto (1) -->
+
+                        <!-- Datos de Habitad -->
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Habitad</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Fuente de clasificación taxonomica:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-binoculars"></i></span>
+                                        </div>
+                                        {# fuente_clasificacion_taxonomica field #}
+                                        <input type="text"
+                                               class="form-control {% if form.fuente_clasificacion_taxonomica.errors %}is-invalid{% endif %}"
+                                               name="fuente_clasificacion_taxonomica"
+                                               placeholder="Fuente de Clasificacion Taxonomica"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.fuente_clasificacion_taxonomica.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Coordenadas:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>X</b></span>
+                                            </div>
+                                            {# x field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.x.errors %}is-invalid{% endif %}"
+                                                    name="x"
+                                                    placeholder="X"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.x.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Y</b></span>
+                                            </div>
+                                            {# y field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.y.errors %}is-invalid{% endif %}"
+                                                    name="y"
+                                                    placeholder="Y"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.y.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Altitud (MSNM):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-water"></i></span>
+                                        </div>
+                                        {# altitud_msnm field #}
+                                        <input type="number"
+                                               class="form-control {% if form.altitud_msnm.errors %}is-invalid{% endif %}"
+                                                name="altitud_msnm"
+                                                placeholder="ALTITUD MSNM"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.altitud_msnm.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datum:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+                                        </div>
+                                        {# datum field #}
+                                        <input type="text"
+                                               style="text-transform:uppercase;"
+                                               class="form-control {% if form.datum.errors %}is-invalid{% endif %}"
+                                                name="datum"
+                                                placeholder="Datum"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.datum.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Temperie:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-smog"></i></span>
+                                        </div>
+                                        {# temperie field #}
+                                        <input type="text"
+                                               style="text-transform:uppercase;"
+                                               class="form-control {% if form.temperie.errors %}is-invalid{% endif %}"
+                                                name="temperie"
+                                                placeholder="Temperie"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.temperie.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                Datos: ---
+                            </div>
+                        </div>
+                        <!-- /Datos Habitad -->
+
+                        <!-- Datos de la Especie -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de la Especie</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="input-group col-md-4">
+                                        <label>Peso (gr):</label>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        <label>Sexo:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        <label>Longitud (cm):</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-4">
+                                        {# peso field #}
+                                        <input type="number"
+                                               class="form-control {% if form.peso.errors %}is-invalid{% endif %}"
+                                                name="peso"
+                                                placeholder="Peso"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.peso.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        {# sexo field #}
+                                        <input type="text"
+                                               class="form-control {% if form.sexo.errors %}is-invalid{% endif %}"
+                                                name="sexo"
+                                                placeholder="Sexo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.sexo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        {# longitud field #}
+                                        <input type="number"
+                                               class="form-control {% if form.longitud.errors %}is-invalid{% endif %}"
+                                                name="longitud"
+                                                placeholder="Longitud"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.longitud.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-4">
+                                        <label>Especie según Ambiente:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        <label>Edad reproductiva:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        <label>Conducta reproductiva:</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-4">
+                                        {# especie_ambiente field #}
+                                        <input type="text"
+                                               class="form-control {% if form.especie_ambiente.errors %}is-invalid{% endif %}"
+                                                name="especie_ambiente"
+                                                placeholder="Especie segun el Ambiente"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.especie_ambiente.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        {# edad_reproductiva field #}
+                                        <input type="number"
+                                               class="form-control {% if form.edad_reproductiva.errors %}is-invalid{% endif %}"
+                                                name="edad_reproductiva"
+                                                placeholder="Edad Reproductiva"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.edad_reproductiva.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-4">
+                                        {# conducta_reproductiva field #}
+                                        <input type="text"
+                                               class="form-control {% if form.conducta_reproductiva.errors %}is-invalid{% endif %}"
+                                                name="conducta_reproductiva"
+                                                placeholder="Conducta Reproductiva"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.conducta_reproductiva.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        <label>Tipo de locomoción:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        <label>Tipo de Hábitat:</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        {# tipo_locomocion field #}
+                                        <input type="text"
+                                               class="form-control {% if form.tipo_locomocion.errors %}is-invalid{% endif %}"
+                                                name="tipo_locomocion"
+                                                placeholder="Tipo de Locomocion"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.tipo_locomocion.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        {# tipo_habitat field #}
+                                        <input type="text"
+                                               class="form-control {% if form.tipo_habitat.errors %}is-invalid{% endif %}"
+                                                name="tipo_habitat"
+                                                placeholder="Tipo Habitad"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.tipo_habitat.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        <label>Grupo Trófico:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        <label>Especie Endémica:</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        {# grupo_triofico field #}
+                                        <input type="text"
+                                               class="form-control {% if form.grupo_triofico.errors %}is-invalid{% endif %}"
+                                                name="grupo_triofico"
+                                                placeholder="Grupo Tofico"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.grupo_triofico.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        {# especie_endemica field #}
+                                        <input type="text"
+                                               class="form-control {% if form.especie_endemica.errors %}is-invalid{% endif %}"
+                                                name="especie_endemica"
+                                                placeholder="Especie Endemica"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.especie_endemica.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        <label>Zona de Endemismo:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        <label>Restringida a EBA:</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        {# zona_endemismo field #}
+                                        <input type="text"
+                                               class="form-control {% if form.zona_endemismo.errors %}is-invalid{% endif %}"
+                                                name="zona_endemismo"
+                                                placeholder="Zona Endemismo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.zona_endemismo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        {# restringida_eba field #}
+                                        <input type="text"
+                                               class="form-control {% if form.restringida_eba.errors %}is-invalid{% endif %}"
+                                                name="restringida_eba"
+                                                placeholder="Restringida EBA"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.restringida_eba.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        <label>Restringida a Bioma:</label>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        <label>Categoría de abundancia:</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="input-group col-md-6">
+                                        {# restringida_bioma field #}
+                                        <input type="text"
+                                               class="form-control {% if form.restringida_bioma.errors %}is-invalid{% endif %}"
+                                                name="restringida_bioma"
+                                                placeholder="Restringida Bioma"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.restringida_bioma.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group col-md-6">
+                                        {# categoria_abundancia field #}
+                                        <input type="text"
+                                               class="form-control {% if form.categoria_abundancia.errors %}is-invalid{% endif %}"
+                                                name="categoria_abundancia"
+                                                placeholder="Categoria Abundancia"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.categoria_abundancia.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de la Especie -->
+                    </div>
+                    <!-- /Prime columna 2/2 -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+<!-- Page specific script -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock %}
+
+
+
+</body>
+</html>

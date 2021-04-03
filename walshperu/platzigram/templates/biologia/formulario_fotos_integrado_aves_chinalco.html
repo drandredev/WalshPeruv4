@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fotos Integrado | Walsh Perú</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Formulario "Fotos Integrado - Aves Chinalco Seca"</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Formularios</a></li>
+                            <li class="breadcrumb-item active">Fotos Integrado</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                                </div>
+
+                                        <div class="input-group col-md-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                                </div>
+
+                                        <div class="input-group col-md-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                                </div>
+
+                                        <div class="input-group col-md-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                                    </div>
+                                                    <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                                </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Departamento / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr size="2px" style="color: #000000;"/>
+
+        <!-- Main content -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- /.card -->
+                    <div class="row">
+                        <!-- Prime columna 1/2-->
+                        <div class="col-md-6">
+
+                            <!-- Caracteristicas de la Especie en la Foto-->
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Caracteristicas de la Especie en la Foto</h3>
+                                    {# user field #}
+                                    <input
+                                            class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                            type="hidden"
+                                            name="user"
+                                            value="{{request.user.id}}"/>
+                                    <div class="invalid-feedback">
+                                        {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label>Tipo</label>
+                                        <div class="row">
+                                            <div class="input-group col-md-6">
+                                                <div class="form-check form-switch">
+                                                    {# especie field #}
+                                                    <input class="form-check-input {% if form.especie.errors %}is-invalid{% endif %}"
+                                                           type="checkbox"
+                                                           id="flexSwitchCheckDefault"
+                                                           name="especie"
+                                                           value="X">
+                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Especie</label>
+                                                </div>
+                                            </div>
+                                            <div class="input-group col-md-6">
+                                                <div class="form-check form-switch">
+                                                    {# paisaje field #}
+                                                    <input class="form-check-input {% if form.especie.errors %}is-invalid{% endif %}"
+                                                           type="checkbox"
+                                                           id="flexSwitchCheckDefault1"
+                                                           name="paisaje"
+                                                           value="X">
+                                                    <label class="form-check-label" for="flexSwitchCheckDefault1">Paisaje</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Nombre cientifico:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-12">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                                </div>
+                                                {# nombre_cientifica field #}
+                                                <input type="text"
+                                                       class="form-control {% if form.nombre_cientifica.errors %}is-invalid{% endif %} form-control"
+                                                       placeholder="Nom. cientifico">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.nombre_cientifica.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Nombre Comun / Nombre Local:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                                </div>
+                                                {# nombre_comun field #}
+                                                <input type="text"
+                                                       class="{% if form.nombre_comun.errors %}is-invalid{% endif %} form-control"
+                                                       placeholder="Nom. Comun"
+                                                       name="nombre_comun">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.nombre_comun.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                                </div>
+                                                {# nombre_local field #}
+                                                <input type="text"
+                                                       class="{% if form.nombre_local.errors %}is-invalid{% endif %} form-control"
+                                                       placeholder="Nom. Local"
+                                                       name="nombre_local">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.nombre_local.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Caracteristicas de la Especie en la Foto -->
+
+                        </div>
+                        <!-- /Prime columna 1/2 -->
+
+                        <!-- Prime columna 2/2-->
+                        <div class="col-md-6">
+
+                            <!-- Card datos de la Foto-->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Datos de la Foto</h3>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label>Estacion de Muestreo / Componente de proyecto :</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-vials"></i></span>
+                                                </div>
+                                                {# estacion_muestreo field #}
+                                                <input type="text"
+                                                       class="{% if form.estacion_muestreo.errors %}is-invalid{% endif %} form-control"
+                                                       placeholder="Muestreo"
+                                                       name="estacion_muestreo">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.estacion_muestreo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-crow"></i></span>
+                                                </div>
+                                                {# componente_proyecto field #}
+                                                <input type="text"
+                                                       class="{% if form.componente_proyecto.errors %}is-invalid{% endif %} form-control"
+                                                       placeholder="Componente"
+                                                       name="componente_proyecto">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.componente_proyecto.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <label>Unidad de Muestreo:</label>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <label>Codigo de la Foto:</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                {# unidad_muestreo field #}
+                                                <input type="text"
+                                                       class="{% if form.unidad_muestreo.errors %}is-invalid{% endif %} form-control"
+                                                       style="text-transform:uppercase;"
+                                                       name="unidad_muestreo">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                {# codigo_foto field #}
+                                                <input type="text"
+                                                       class="{% if form.codigo_foto.errors %}is-invalid{% endif %} form-control"
+                                                       name="codigo_foto">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.codigo_foto.errors %}{{ error }}{% endfor %}
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Fecha de Registro:</label>
+                                        <div class="input-group" >
+                                            <div class="input-group-append">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                            {# fecha_toma field #}
+                                            <input type="date"
+                                                   class="{% if form.fecha_toma.errors %}is-invalid{% endif %} form-control"
+                                                   name="fecha_toma">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.fecha_toma.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /Card Datos de la Foto -->
+
+                        </div>
+                        <!-- /Prime columna 2/2 -->
+                    </div>
+    
+                    <div class="row" style="justify-content: center">
+
+                        <div class="col-md-6" >
+                            <!-- Datos de Habitad -->
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">Lugar de Origen</h3>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label>Distrito:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-binoculars"></i></span>
+                                            </div>
+                                            {# distrito field #}
+                                            <input type="text"
+                                                   class="{% if form.distrito.errors %}is-invalid{% endif %} form-control"
+                                                   placeholder="Distrito"
+                                                   name="distrito">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.distrito.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Provincia:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-water"></i></span>
+                                            </div>
+                                            {# provincia field #}
+                                            <input type="text"
+                                                   class="{% if form.provincia.errors %}is-invalid{% endif %} form-control"
+                                                   placeholder="Provincia"
+                                                   name="provincia">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.provincia.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Departamento:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+                                            </div>
+                                            {# departamento field #}
+                                            <input type="text"
+                                                   placeholder="Departamento"
+                                                   class="{% if form.departamento.errors %}is-invalid{% endif %} form-control"
+                                                   name="departamento">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.departamento.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Datos Habitad -->
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h3 class="card-title">Enviar Los Datos</h3>
+                                </div>
+                                <div class="card-body">
+                                    <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    Gracias por llenar el formulario.
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </form>
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+
+        //Date range picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+        })
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                    'Today'       : [moment(), moment()],
+                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment()
+            },
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
+
+        //Timepicker
+        $('#timepicker').datetimepicker({
+            format: 'LT'
+        })
+
+        //Bootstrap Duallistbox
+        $('.duallistbox').bootstrapDualListbox()
+
+        //Colorpicker
+        $('.my-colorpicker1').colorpicker()
+        //color picker with addon
+        $('.my-colorpicker2').colorpicker()
+
+        $('.my-colorpicker2').on('colorpickerChange', function(event) {
+            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+        })
+
+        $("input[data-bootstrap-switch]").each(function(){
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        })
+
+    })
+    // BS-Stepper Init
+    document.addEventListener('DOMContentLoaded', function () {
+        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+    })
+
+    // DropzoneJS Demo Code Start
+    Dropzone.autoDiscover = false
+
+    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+    var previewNode = document.querySelector("#template")
+    previewNode.id = ""
+    var previewTemplate = previewNode.parentNode.innerHTML
+    previewNode.parentNode.removeChild(previewNode)
+
+    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+        url: "/target-url", // Set the url
+        thumbnailWidth: 80,
+        thumbnailHeight: 80,
+        parallelUploads: 20,
+        previewTemplate: previewTemplate,
+        autoQueue: false, // Make sure the files aren't queued until manually added
+        previewsContainer: "#previews", // Define the container to display the previews
+        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+    })
+
+    myDropzone.on("addedfile", function(file) {
+        // Hookup the start button
+        file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+    })
+
+    // Update the total progress bar
+    myDropzone.on("totaluploadprogress", function(progress) {
+        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+    })
+
+    myDropzone.on("sending", function(file) {
+        // Show the total progress bar when upload starts
+        document.querySelector("#total-progress").style.opacity = "1"
+        // And disable the start button
+        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+    })
+
+    // Hide the total progress bar when nothing's uploading anymore
+    myDropzone.on("queuecomplete", function(progress) {
+        document.querySelector("#total-progress").style.opacity = "0"
+    })
+
+    // Setup the buttons for all transfers
+    // The "add files" button doesn't need to be setup because the config
+    // `clickable` has already been specified.
+    document.querySelector("#actions .start").onclick = function() {
+        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+    }
+    document.querySelector("#actions .cancel").onclick = function() {
+        myDropzone.removeAllFiles(true)
+    }
+    // DropzoneJS Demo Code End
+</script>
+{% endblock %}
+</body>
+</html>

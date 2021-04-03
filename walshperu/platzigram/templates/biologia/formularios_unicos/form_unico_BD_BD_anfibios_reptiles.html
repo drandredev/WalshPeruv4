@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anfibios y Reptiles | Walsh Perú</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid" style="text-align: center;">
+                <h1>Base de Datos Anfibios Reptiles
+                </h1>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.user.first_name}}"  readonly placeholder="Nombre">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.user.last_name}}"  readonly placeholder="Apellido">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.user.profile.celular}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" value="{{reptiles_bd_anfibios.user.email}}"  readonly >
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Departamento / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{reptiles_bd_anfibios.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{reptiles_bd_anfibios.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr style="background-color: rgb(0, 0, 0); border:solid 1.5px black; margin: 10px 15px 25px 15px" >
+
+
+        <!-- Contenedor de Cartas -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="card card-info mb-3">
+                    <div class="card-header">
+                        <h3 class="card-title">Datos de Registro seleccionado</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Código del Proyecto:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.codigo_proyecto}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Fecha de registro:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.fecha_registro}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Temporada:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.temporada_evaluacion}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Unidad de vegetación(QUEBRADA):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.unidad_vegetacion_quebrada}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Sector:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.sector}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Código de la Quebrada:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.codigo_quebrada}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Disciplina Biológica:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.disciplina_biologica}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Estación de muestreo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.estacion_muestreo}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Unidad de muestreo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.unidad_muestreo}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Método de muestreo:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.metodo_muestreo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tamaño de la unidad de muestreo (m):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.tamaño_unidad_muestreo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>marca de dedos:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.chip_marca_dedos}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Periodo del dia:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.periodo_dia}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Hora de inicio de evaluación:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.hora_inicio_evaluacion}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Hora de finalización de evaluación:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.hora_finalizacion_evaluacion}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Hora de registro:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.hora_registro}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Familia:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.familia}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Especie:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.especie}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Nombre común:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.nombre_comun}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Nombre local:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.nombre_local}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Fuente de clasificación taxonomica:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.fuente_clasificacion_taxonomic}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>X:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.x}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Y:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.y}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Proyección:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.proyeccion}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Altitud (msnm):</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.altitud_msnm}}" readonly>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Datum:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.datum}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>T ° del ambiente (°C):</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.temperatura_ambiente}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>T ° del suelo (°C):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.temperatura_suelo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Profundidad de hojarasca (cm):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.profundidad_hojarrasca_cm}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Temperie:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.temperie}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Distancia perpendicular de la unidad de muestreo (cm):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.distancia_perpendicular_unidad_muestreo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Altura del registro (Distancia vertical al suelo) cm:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.altura_registro_distancia_vertical_suelo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de Evaluación:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.tipo_evaluacion}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de registro:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.tipo_registro}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>N° Registro Directo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.numero_registro_directo}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>N°Registro indirecto:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.numero_registro_indirecto}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>N°Registro por captura:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.numero_registro_captura}}" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 ">
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Estado del hallazgo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.estado_hallazgo}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Etología:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.etologia_comportamiento_individuo_registrado}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Nº total de individuos:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control"  value="{{reptiles_bd_anfibios.numero_total_individuos}}"readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Peso (gr):</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.peso}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Sexo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.sexo}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Longitud total (cm):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.longitud}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Longitud ano-hocico (cm):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.longitud_ano_hocico}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Longitud de cola (lagartijas y serpientes):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.longitud_cola_lagartijas_serpientes}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Tipo de Reproducción:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.tipo_reproduccion_anfibios}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Conducta reproductiva:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.conducta_reproductva_in_situ}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Restringida a Bioma (Stozt et al., 1996):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.codigo_proyecto}}" readonly>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Conducta Social:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.conducta_social}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Territorialidad:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.territorialidad}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Hábito:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.habito}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de Hábitat (in situ):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.tipo_habitat_in_situ}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Micro-habitat (insitu):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.micro_habitat_in_situ}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Plantas dominante del microhabitat (insitu):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.planta_dominante_microhabitat_in_situ}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Grupo Trófico:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.grupo_trofico}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Registro de dieta  (in situ):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.registro_dieta_in_situ}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Especie Endémica:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.especie_endemica}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Nivel de Endemismo:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.nivel_endemismo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Distribución de especies endémicas:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.distribucion_especie_endemica}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>DS O34-2004-AG:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.DSO342004AG}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>IUCN:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.IUCN}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>CITES:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{reptiles_bd_anfibios.CITES}}" readonly>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Uso potencial:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.uso_potencial}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Observaciones del registro:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.observaciones_registro}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Distribución de especies endémicas:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.distribucion_especie_endemica}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Actividad humana:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.actividad_humana}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Estado de conservación del hábitat:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.estado_conservacion_habitat}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>istancia al componente minero:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.distancia_componente_minero}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Medida de control para impedir ingreso de grupo biologico:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.medida_control_impedir_ingreso}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Micro-habitat:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.micro_habitat}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>animal a las instalaciones:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.animal_instalaciones}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Riesgo de contacto por el animal a las instalaciones :</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.riesgo_contacto_animal_instalaciones}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Observaciones:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{reptiles_bd_anfibios.observaciones_animales_muertos}}" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <a type="button" href="{% url 'exportar_Anfibios_reptiles_BD_unico' reptiles_bd_anfibios.id %}" class="btn btn-success">Excel</a>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <a type="button" class="btn btn-danger" onclick="javascript:window.print()" style="color: white">Exportar PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Mas Opciones</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="{% url 'lista_formularios_anfibios_reptiles' %}" class="btn btn-primary col-md-3" type="submit" >Volver</a>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

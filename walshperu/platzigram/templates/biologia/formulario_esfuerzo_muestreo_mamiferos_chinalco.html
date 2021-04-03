@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Esfuerzo Muestreo | Walsh Peru</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Esfuerzo de Muestreo (Mamiferos Chinalco)</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Mamiferos Chinalco</a></li>
+                            <li class="breadcrumb-item active">Ezfuerzo de muestreo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Datos de Usuario-->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <!-- Datos de Usuario-->
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h3 class="card-title">Datos de Usuario</h3>
+                                </div>
+                                <div class="card-body">
+                                    {# user field #}
+                                    <input
+                                            class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                            type="hidden"
+                                            name="user"
+                                            value="{{request.user.id}}"/>
+                                    <div class="invalid-feedback">
+                                        {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Datos personales:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                            </div>
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                            </div>
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                            </div>
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                                </div>
+                                                <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Departamento / Rol:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Datos de Usuario-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <!-- /Datos de Usuario-->
+
+            <hr size="2px" style="color: #000000;"/>
+
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Set 1</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Fecha:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                                        </div>
+                                        {# fecha field #}
+                                        <input type="date"
+                                               class="form-control {% if form.fecha.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                name="fecha"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.fecha.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Grupo:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-layer-group"></i></span>
+                                        </div>
+                                        {# grupo field #}
+                                        <input type="text"
+                                               class="form-control {% if form.grupo.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                name="grupo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.grupo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Temporada:</label>
+                                    {# temporada field #}
+                                    <select class="custom-select rounded-0"
+                                            id="exampleSelectRounded0"
+                                            name="temporada">
+                                        <option value="-">Seleccionar</option>
+                                        <option value="Seco">Seco</option>
+                                        <option value="Humedo">Humedo</option>
+                                        <option value="Nevado">Nevado</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Unidad de Vegetacion:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fab fa-pagelines"></i></span>
+                                        </div>
+                                        {# unidad_vegetacion field #}
+                                        <input type="text"
+                                               class="form-control {% if form.unidad_vegetacion.errors %}is-invalid{% endif %}"
+                                               name="unidad_vegetacion"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.unidad_vegetacion.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Estacion de muestreo:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Unidad de muestreo:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vials"></i></span>
+                                            </div>
+                                            {# estacion_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.estacion_muestreo.errors %}is-invalid{% endif %}"
+                                                   name="estacion_muestreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.estacion_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                            </div>
+                                            {# unidad_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_muestreo.errors %}is-invalid{% endif %}"
+                                                   name="unidad_muestreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Trampas noche:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>No. Total individuios:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# trampas_noche field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.trampas_noche.errors %}is-invalid{% endif %}"
+                                                   name="trampas_noche"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.trampas_noche.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>N</b></span>
+                                            </div>
+                                            {# numero_total_individuos field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.numero_total_individuos.errors %}is-invalid{% endif %}"
+                                                   name="numero_total_individuos"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.numero_total_individuos.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Especie 1:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Especie 2:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>E</b></span>
+                                            </div>
+                                            {# especie1 field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.especie1.errors %}is-invalid{% endif %}"
+                                                   name="especie1"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.especie1.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>E</b></span>
+                                            </div>
+                                            {# especie2 field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.especie2.errors %}is-invalid{% endif %}"
+                                                   name="especie2"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.especie2.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Especie 3:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Especie 4:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>E</b></span>
+                                            </div>
+                                            {# especie3 field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.especie3.errors %}is-invalid{% endif %}"
+                                                   name="especie3"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.especie3.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>E</b></span>
+                                            </div>
+                                            {# especie4 field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.especie4.errors %}is-invalid{% endif %}"
+                                                   name="especie4"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.especie4.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Clima:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-smog"></i></span>
+                                        </div>
+                                        {# clima field #}
+                                        <input type="text"
+                                               class="form-control {% if form.clima.errors %}is-invalid{% endif %}"
+                                               name="clima"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.clima.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos Mamiferos</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Unidad de Muestreo:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        </div>
+                                        {# unidad_muestreo field #}
+                                        <input type="text"
+                                               class="form-control {% if form.unidad_muestreo.errors %}is-invalid{% endif %}"
+                                               name="unidad_muestreo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Mamiferos Menores:</label>
+                                    <div class="input-group">
+                                        {# mamiferos_menores field #}
+                                        <input type="text"
+                                               class="form-control {% if form.mamiferos_menores.errors %}is-invalid{% endif %}"
+                                               name="mamiferos_menores"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.mamiferos_menores.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Mamiferos Mayores:</label>
+                                    <div class="input-group">
+                                        {# mamiferos_mayores field #}
+                                        <input type="text"
+                                               class="form-control {% if form.mamiferos_mayores.errors %}is-invalid{% endif %}"
+                                               name="mamiferos_mayores"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.mamiferos_mayores.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- /.columna Izquierda -->
+                    <div class="col-md-6">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Set 2</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Grupo:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-layer-group"></i></div>
+                                        </div>
+                                        {# grupo1 field #}
+                                        <input type="text"
+                                               class="form-control {% if form.grupo1.errors %}is-invalid{% endif %}"
+                                               name="grupo1"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.grupo1.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Estacion de muestreo:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Unidad de muestreo (transecto):</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vials"></i></span>
+                                            </div>
+                                            {# estacion_muestreo1 field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.estacion_muestreo1.errors %}is-invalid{% endif %}"
+                                                   name="estacion_muestreo1"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.estacion_muestreo1.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                            </div>
+                                            {# unidad_muestreo_transecto field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_muestreo_transecto.errors %}is-invalid{% endif %}"
+                                                   name="unidad_muestreo_transecto"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_muestreo_transecto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas2_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas2_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas2_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas2_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Elevacion (m):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-arrow-up"></i></div>
+                                        </div>
+                                        {# elevacion_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.elevacion_metros.errors %}is-invalid{% endif %}"
+                                               name="elevacion_metros"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.elevacion_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas3_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas3_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas3_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas3_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas4_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas4_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas4_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas4_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Elevacion (m):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-arrow-up"></i></div>
+                                        </div>
+                                        {# elevacion2_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.elevacion2_metros.errors %}is-invalid{% endif %}"
+                                               name="elevacion2_metros"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.elevacion2_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Metros Recorridos:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-walking"></i></div>
+                                        </div>
+                                        {# metros_recorridos field #}
+                                        <input type="number"
+                                               class="form-control {% if form.metros_recorridos.errors %}is-invalid{% endif %}"
+                                               name="metros_recorridos"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.metros_recorridos.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas5_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas5_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas5_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas5_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas6_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas6_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas6_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas6_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Elevacion (m):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-arrow-up"></i></div>
+                                        </div>
+                                        {# elevacion3_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.elevacion3_metros.errors %}is-invalid{% endif %}"
+                                               name="elevacion3_metros"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.elevacion3_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas7_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas7_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas7_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas7_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas8_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas8_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas8_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas8_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Elevacion (m):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-arrow-up"></i></div>
+                                        </div>
+                                        {# elevacion4_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.elevacion4_metros.errors %}is-invalid{% endif %}"
+                                               name="elevacion4_metros"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.elevacion4_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas9_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas9_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas9_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas9_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas10_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas10_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas10_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas10_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Elevacion (m):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-arrow-up"></i></div>
+                                        </div>
+                                        {# elevacion5_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.elevacion5_metros.errors %}is-invalid{% endif %}"
+                                               name="elevacion5_metros"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.elevacion5_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Coordenadas UTM:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas11_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas11_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas11_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas11_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>°c</b></span>
+                                            </div>
+                                            {# coordenadas12_utm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.coordenadas12_utm.errors %}is-invalid{% endif %}"
+                                                   name="coordenadas12_utm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.coordenadas12_utm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Elevacion (m):</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fas fa-arrow-up"></i></div>
+                                        </div>
+                                        {# elevacion6_metros field #}
+                                        <input type="number"
+                                               class="form-control {% if form.elevacion6_metros.errors %}is-invalid{% endif %}"
+                                               name="elevacion6_metros"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.elevacion6_metros.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        </form>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

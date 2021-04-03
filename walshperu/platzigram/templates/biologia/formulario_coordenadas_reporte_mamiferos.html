@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reporte Coordenadas | Walsh Peru</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Contenedor de Cartas -->
+    <div class="content-wrapper">
+        <!-- Cavezera -->
+
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Reporte de Coordenadas (Mamiferos chinalco)</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Coordenadas Integradas</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /cavezera -->
+
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Departamento / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr size="2px" style="color: #000000;"/>
+
+        <!-- Contenerdor Principal -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Coordenadas</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            {# user field #}
+                                            <input
+                                                    class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                                    type="hidden"
+                                                    name="user"
+                                                    value="{{request.user.id}}"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            <label>Sector:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><b>SC</b></span>
+                                                </div>
+                                                {# sector field #}
+                                                <input type="text"
+                                                       class="{% if form.sector.errors %}is-invalid{% endif %} form-control"
+                                                       name="sector">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.sector.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Estacion de Muestreo:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-vials"></i></span>
+                                                </div>
+                                                {# estacion_muestreo field #}
+                                                <input type="text"
+                                                       style="text-transform:uppercase;"
+                                                       class="{% if form.estacion_muestreo.errors %}is-invalid{% endif %} form-control"
+                                                       name="estacion_muestreo">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.estacion_muestreo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Coordenadas UTM (WGS8):</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><b>E</b></span>
+                                                </div>
+                                                {# coordenadas_utm_wgs84 field #}
+                                                <input type="number"
+                                                       style="text-transform:uppercase;"
+                                                       class="{% if form.coordenadas_utm_wgs84.errors %}is-invalid{% endif %} form-control"
+                                                       name="coordenadas_utm_wgs84-este"
+                                                        value="0">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.coordenadas_utm_wgs84.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Altitud:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><b>A</b></span>
+                                                </div>
+                                                {# altitud field #}
+                                                <input type="number"
+                                                       style="text-transform:uppercase;"
+                                                       class="{% if form.altitud.errors %}is-invalid{% endif %} form-control"
+                                                       name="altitud">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.altitud.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label>Unidad de Vegetacion:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fab fa-pagelines"></i></span>
+                                                </div>
+                                                {# unidad_vegetacion field #}
+                                                <input type="text"
+                                                       class="{% if form.estacion_muestreo.errors %}is-invalid{% endif %} form-control"
+                                                       name="unidad_vegetacion">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.unidad_vegetacion.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Unidad de Muestreo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                                </div>
+                                                {# unidad_muestreo field #}
+                                                <input type="text"
+                                                       style="text-transform:uppercase;"
+                                                       class="{% if form.unidad_muestreo.errors %}is-invalid{% endif %} form-control"
+                                                       name="unidad_muestreo" >
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>-</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><b>N</b></span>
+                                                </div>
+                                                {# coordenadas_utm_wgs84 field #}
+                                                <input type="number"
+                                                       class="{% if form.coordenadas_utm_wgs84.errors %}is-invalid{% endif %} form-control"
+                                                       name="coordenadas_utm_wgs84-norte"
+                                                       value="0">
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.coordenadas_utm_wgs84.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Grupo</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                                </div>
+                                                {# grupo field #}
+                                                <input type="text"
+                                                       style="text-transform:uppercase;"
+                                                       class="{% if form.grupo.errors %}is-invalid{% endif %} form-control"
+                                                       name="grupo" >
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.grupo.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                Datos sobre el Habitad de las especies de los mamiferos.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+        </form>
+    </div>
+
+    <!-- /.Contenedor de Cartas -->
+
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

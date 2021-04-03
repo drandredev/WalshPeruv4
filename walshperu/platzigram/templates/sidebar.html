@@ -1,0 +1,206 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'posts:feed' %}" class="brand-link">
+        <img src="{% static 'admin-lte/dist/img/logowalsh.jpg' %}"  class="brand-image img-circle elevation-3" style="opacity: 1">
+        <span class="brand-text font-weight-light">Walsh Perú</span>
+    </a>
+    <a href="#" class="brand-link">
+        <img src="{% static 'admin-lte/dist/img/biologia.png' %}" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{request.user.profile.departamento}}</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" >
+        <!-- Sidebar user panel (optional) -->
+
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ request.user.profile.picture.url }}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{request.user.first_name}} {{request.user.last_name}}</a>
+            </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-4" >
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" >
+
+                <li class="nav-item menu" style="width: 100%">
+                    <a href="#" class="nav-link active bg-info">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            Formularios
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    {% if request.user.profile.departamento == "Biología" %}
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item" >
+                            <a href="{% url 'form_BD_Avez_Chinalco' %}" class=" nav-link ">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Aves Chinalco 2018
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_fotos_integrado_Avez_Chinalco' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Fotos Integrado Aves Chinalco
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_coordenadas_aves' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Coordenadas Integradas Aves
+                                </span>
+                            </a>
+                        </li>
+                        <hr size="2px" style="color: #000000;"/>
+                        <li class="nav-item">
+                            <a href="{% url 'form_anfibios_reptiles_base_datos' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Anfibios y Reptiles Base de Datos
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_coordenadas_anfibios_repites_bd' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Coordenadas Anfibios y Reptiles
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_db_hoja1' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Hoja1 BD
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_fotos_db' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Fotos BD Reptiles y Anfibios
+                                </span>
+                            </a>
+                        </li>
+                        <hr size="2px" style="color: #000000;"/>
+                        <li class="nav-item">
+                            <a href="{% url 'form_bitacora_mamiferos' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Bitacora Mamiferos
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'form_coordenadas_reporte_mamiferos' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Coordenadas Reporte Mamiferos
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_esfuerzo_muestreo_mamiferos' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Esfuerzo muestreo Mamiferos
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_BD_mamiferos' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                   Base de Datos de Mamiferos
+                                </span>
+                            </a>
+                        </li>
+                        <hr size="2px" style="color: #000000;"/>
+                        <li class="nav-item">
+                            <a href="{% url 'form_hoja3_vegetacion' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Hoja3 Vegetacion
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'form_Vegetacion_Compensacion_Ambiental' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Compensacion Ambiental
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'form_Vegetacion_Base_datos' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Vegetacion Base de Datos.
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'form_Vegetacion_esfuerzo_muestreo' %}" class="nav-link">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    Vegetacion Esfuerzo.
+                                </span>
+                            </a>
+                        </li>
+                        <hr size="2px" style="color: #000000;"/>
+                    </ul>
+                    {% else%}
+                <li class="nav-item" >
+                    <a href="#" class=" nav-link ">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    No tienes departamento.
+                                </span>
+                    </a>
+                </li>
+                    {% endif %}
+                </li>
+                <li class="nav-item menu" style="width: 100%">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>
+                            Ver Reportes
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    {% if request.user.profile.departamento == "Biología" %}
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'lista_formularios_aves' %}" class="nav-link ">
+                                <i class="fas fa-angle-right"></i>
+                                <p>Proyecto MIN1711</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                    {% else%}
+                <li class="nav-item" >
+                    <a href="#" class=" nav-link ">
+                                <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                    No tienes departamento.
+                                </span>
+                    </a>
+                </li>
+                {% endif %}
+                </li>
+                <li class="nav-item menu " style="width: 100%">
+                    <a href="{% url 'users:logout' %}" class="nav-link active bg-danger">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Salir</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

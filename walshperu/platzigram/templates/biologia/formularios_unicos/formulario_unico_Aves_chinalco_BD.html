@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aves Chinalco | Walsh Perú</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid" style="text-align: center;">
+                <h1>Base de Datos Aves Integrada Chinalco 2018</h1>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.user.first_name}}"  readonly placeholder="Nombre">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.user.last_name}}"  readonly placeholder="Apellido">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.user.profile.celular}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" value="{{aves_unic.user.email}}"  readonly >
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Area / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{aves_unic.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{aves_unic.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr style="background-color: rgb(0, 0, 0); border:solid 1.5px black; margin: 10px 15px 25px 15px" >
+
+
+        <!-- Contenedor de Cartas -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="card card-danger mb-3">
+                    <div class="card-header">
+                        <h3 class="card-title">Datos de Registro seleccionado</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Código:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.codigo_proyecto}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Fecha:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.fecha_registro}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Est. Muestreo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.estacion_muestreo}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>U. Vegetacion:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.unidad_vegetacion}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>P. del dia</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.periodo_dia}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>H. Registro</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.hora_registro}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Familia:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.familia}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Nombre común:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.nombre_comun}}" readonly>
+                                    </div>
+                                </div>
+
+                                <!--
+                                 <div class="form-group">
+                                    <label>Coordenadas</label>
+                                </div>
+                                 -->
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>X</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.x}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Y</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.y}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Temperie:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.temperie}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Reg. Visua:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.registro_visual}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Reg. auditivo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.registro_auditivo}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Nº total de individuos:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.numero_total_individuos}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Observaciones (etología):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.observaciones_etologia}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Longitud (cm):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.longitud}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Edad reproductiva:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.edad_reproductiva}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de locomoción:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.tipo_locomocion}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Grupo Trófico:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.grupo_triofico}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Restringida a EBA:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.restringida_eba}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Categoría de abundancia:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.categoria_abundancia}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>IUCN:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.iucn}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>CITES:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.cites}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Congregatoria:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.congregatoria}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Actividad humana:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.actividad_humana}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Colector de registro:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.colector_registro}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Tipo de muestra:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.tipo_muestra}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de preparación de la muestra:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.preparacion_muestra}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Institución de depósito:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.institucion_deposito}}" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 ">
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Temp Evaluacion:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.temporada_evaluacion}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>U. Vegetacion:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.unidad_vegetacion}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Método de muestreo:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.metodo_muestreo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Orden:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.orden}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Especie:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.especie}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>F. clasificación taxonomica:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.fuente_clasificacion_taxonomica}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Altitud:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.altitud_msnm}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Datum:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.datum}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de Evaluación:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.tipo_evaluacion}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Reg. x captura:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.registro_captura}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Reg. Casual:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.registro_casual}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Distancia al punto de conteo (m):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.distancia_punto_conteo}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Peso (gr):</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.peso}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Sexo:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.sexo}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Especie según Ambiente:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.especie_ambiente}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Conducta reproductiva:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.conducta_reproductiva}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Tipo de Hábitat:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.tipo_habitat}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Especie Endémica:</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.especie_endemica}}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Zona de Endemismo</b></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{aves_unic.zona_endemismo}}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Restringida a Bioma (Stozt et al., 1996):</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.restringida_bioma}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>DS O04-2014-MINAGRI:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.DS_O04_2014_MINAGRI}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Migratoria:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.migratoria}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Observaciones sobre la muestra:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.observaciones_muestra}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Estado de conservación del hábitat:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.estado_conservacion_habitat}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Estado de la muestra:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.estado_muestra}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Codigo de Colecta:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.codigo_colecta}}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><b>Código fotos:</b></span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{aves_unic.codigo_fotos}}" readonly>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer text-center">
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <a type="button" href="{% url 'export_excel_unico' aves_unic.id %}" class="btn btn-success">Excel</a>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <a type="button" class="btn btn-danger" onclick="javascript:window.print()" style="color: white">Exportar PDF</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title">Mas Opciones</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <a href="{% url 'lista_formularios_aves' %}" class="btn btn-primary col-md-3" type="submit" >Volver</a>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

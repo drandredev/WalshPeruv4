@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hoja 1 BD | Walsh Peru</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Formulario "Hoja 1 - DB"</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Formularios</a></li>
+                            <li class="breadcrumb-item active">Hoja 1</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Datos de Usuario-->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <!-- Datos de Usuario-->
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Usuario</h3>
+                            </div>
+                            <div class="card-body">
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datos personales:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Departamento / Rol:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Usuario-->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- /Datos de Usuario-->
+
+        <hr size="2px" style="color: #000000;"/>
+
+        <!-- Main content -->
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <section class="content">
+            <div class="container-fluid">
+                <!-- /.card -->
+                <div class="row">
+
+                    <!-- Prime columna 2/2-->
+                    <div class="col-md-12">
+
+                        <!--  Vegetacion, Monitoreo y Coordenadas-->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Vegetacion, Monitoreo y Coordenadas</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Unidad de Vegetacion / Estacion de Monitores:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-feather-alt"></i></span>
+                                            </div>
+                                            {# unidad_vegetacion field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_vegetacion.errors %}is-invalid{% endif %}"
+                                                    name="unidad_vegetacion"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_vegetacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-watchman-monitoring"></i></span>
+                                            </div>
+                                            {# estacion_monitoreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.estacion_monitoreo.errors %}is-invalid{% endif %}"
+                                                   style="text-transform: uppercase;"
+                                                    name="estacion_monitoreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.estacion_monitoreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="text-center"><label>COORDENADAS:</label></div>
+
+                                    <div class="form-group">
+                                        <label>Inicio:</label>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="input-group col-md-6">
+                                                    <label>Este:</label>
+                                                </div>
+
+                                                <div class="input-group col-md-6">
+                                                    <label>Norte:</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="input-group col-md-6">
+                                                    {# coordenadas_inicio field #}
+                                                    <input type="number"
+                                                           class="form-control {% if form.coordenadas_inicio.errors %}is-invalid{% endif %}"
+                                                           name="coordenadas_inicio-este"
+                                                           value="0">
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.coordenadas_inicio.errors %}{{ error }}{% endfor %}
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group col-md-6">
+                                                    {# coordenadas_inicio field #}
+                                                    <input type="number"
+                                                           class="form-control {% if form.coordenadas_inicio.errors %}is-invalid{% endif %}"
+                                                           name="coordenadas_inicio-norte"
+                                                           value="0">
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.estacion_monitoreo.errors %}{{ error }}{% endfor %}
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Final:</label>
+                                        <div class="form-group">
+                                            <div class="row">
+
+                                                <div class="input-group col-md-6">
+                                                    <label>Este:</label>
+                                                </div>
+
+                                                <div class="input-group col-md-6">
+                                                    <label>Norte:</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="input-group col-md-6">
+                                                    {# coordenadas_final field #}
+                                                    <input type="number"
+                                                           class="form-control {% if form.coordenadas_final.errors %}is-invalid{% endif %}"
+                                                            name="coordenadas_final-este"
+                                                            value="0">
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.coordenadas_final.errors %}{{ error }}{% endfor %}
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group col-md-6">
+                                                    {# coordenadas_final field #}
+                                                    <input type="number"
+                                                           class="form-control {% if form.coordenadas_final.errors %}is-invalid{% endif %}"
+                                                            name="coordenadas_final-norte"
+                                                            value="0">
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.coordenadas_final.errors %}{{ error }}{% endfor %}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Vegetacion, Monitoreo y Coordenadas -->
+
+                    </div>
+                    <!-- /Prime columna 2/2 -->
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        </form>
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

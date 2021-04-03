@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fotos BD | Walsh Peru</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Fotos BD</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">BD</a></li>
+                            <li class="breadcrumb-item active">Fotos</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Contenedor principal -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Lugar de Toma de foto</h3>
+
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <label>N°:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-8">
+                                            <label>Unidad de vegetacion:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            {# lugar_toma_foto field #}
+                                            <input type="number" class="form-control {% if form.lugar_toma_foto.errors %}is-invalid{% endif %}"
+                                                   name="lugar_toma_foto-n"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.lugar_toma_foto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-8">
+                                            {# lugar_toma_foto field #}
+                                            <input type="text" class="form-control {% if form.lugar_toma_foto.errors %}is-invalid{% endif %}"
+                                                   name="lugar_toma_foto-unidad_vegetacion"
+                                                   value=" "/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.lugar_toma_foto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Sector:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Codigo de la Quebrada:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# lugar_toma_foto field #}
+                                            <select class="custom-select rounded-0" id="exampleSelectRounded0"
+                                                    name="lugar_toma_foto-sector_alto_bajo_medio">
+                                                <option value="-">Seleccionar</option>
+                                                <option value="Alto">Alto</option>
+                                                <option value="Medio">Medio</option>
+                                                <option value="Bajo">Bajo</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            {# lugar_toma_foto field #}
+                                            <input type="text" class="form-control {% if form.lugar_toma_foto.errors %}is-invalid{% endif %}"
+                                                   name="lugar_toma_foto-codigo_quebrada"
+                                                    value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.lugar_toma_foto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Estacion de Muestreo:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Unidad de Muestreo (UM):</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# lugar_toma_foto field #}
+                                            <input type="text" style="text-transform:uppercase;" class="form-control {% if form.lugar_toma_foto.errors %}is-invalid{% endif %}"
+                                                   name="lugar_toma_foto-estacion_muestreo"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.lugar_toma_foto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            {# lugar_toma_foto field #}
+                                            <input type="text" style="text-transform:uppercase;" class="form-control {% if form.lugar_toma_foto.errors %}is-invalid{% endif %}"
+                                                   name="lugar_toma_foto-unidad_muestreo_um"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.lugar_toma_foto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Especie</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Nombre Cientifico:</label>
+                                    <div class="input-group">
+                                        {# especie field #}
+                                        <input type="text" class="form-control {% if form.especie.errors %}is-invalid{% endif %}"
+                                               name="especie-nombre_cientifico"
+                                               value=" ">
+                                        <div class="invalid-feedback">
+                                            {% for error in form.especie.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Nombre Comun:</label>
+                                    <div class="input-group">
+                                        {# especie field #}
+                                        <input type="text" class="form-control {% if form.especie.errors %}is-invalid{% endif %}"
+                                               name="especie-nombre_comun"
+                                               value=" ">
+                                        <div class="invalid-feedback">
+                                            {% for error in form.especie.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Codificacion</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Codigo de la foto:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Fecha de Toma:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-camera-retro"></i></span>
+                                            </div>
+                                            {# codificacion field #}
+                                            <input type="text" style="text-transform:uppercase;" class="form-control {% if form.codificacion.errors %}is-invalid{% endif %}"
+                                                   name="codificacion-codigo_foto"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.codificacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar-week"></i></span>
+                                            </div>
+                                            {# codificacion field #}
+                                            <input type="date" class="form-control {% if form.codificacion.errors %}is-invalid{% endif %}"
+                                                   name="codificacion-fecha_toma"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.codificacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Tipo de Foto</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Especie:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Paisaje:</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# tipo_foto field #}
+                                            <input type="checkbox" class="{% if form.tipo_foto.errors %}is-invalid{% endif %}" name="tipo_foto-especie" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.tipo_foto.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            {# tipo_foto field #}
+                                            <input type="checkbox" class="{% if form.tipo_foto_paisaje.errors %}is-invalid{% endif %}" name="tipo_foto-paisaje" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.tipo_foto.errors %}{{ error }}{% endfor %}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                <h3 class="card-title">Ubicacion</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Localidad:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Distrito:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# ubicacion field #}
+                                            <input type="text" class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}"
+                                                    name="ubicacion-localidad"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ubicacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            {# ubicacion field #}
+                                            <input type="text" class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}"
+                                                    name="ubicacion-distrito"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ubicacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Provincia:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Departamento:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# ubicacion field #}
+                                            <input type="text" class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}"
+                                                   name="ubicacion-provincia"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ubicacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            {# ubicacion field #}
+                                            <input type="text" class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}"
+                                                   name="ubicacion-departamento"
+                                                   value=" ">
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ubicacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Breve descripcion de la foto</h3>
+                            </div>
+                            <div class="card-body ">
+                                {# breve_descripcion_foto field #}
+                                <textarea class="form-control {% if form.breve_descripcion_foto.errors %}is-invalid{% endif %}" rows="3" placeholder="Enter ..."
+                                          name="breve_descripcion_foto"></textarea>
+                                <div class="invalid-feedback">
+                                    {% for error in form.breve_descripcion_foto.errors %}{{ error }}{% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        </form>
+    </div>
+
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>

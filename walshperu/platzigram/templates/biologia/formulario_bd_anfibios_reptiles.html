@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anfibios y Reptiles | Walsh Peru</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    {% include "rel.html" %}
+</head>
+<body class="hold-transition sidebar-mini">
+{% include 'messages.html' %}
+<div class="wrapper">
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include "sidebar.html" %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Formulario "BD Anfibios y Reptiles"</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Formularios</a></li>
+                            <li class="breadcrumb-item active">DB Anfibios y Reptiles</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+            <!-- Datos de Usuario-->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <!-- Datos de Usuario-->
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h3 class="card-title">Datos de Usuario</h3>
+                                </div>
+                                <div class="card-body">
+                                    {# user field #}
+                                    <input
+                                            class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                            type="hidden"
+                                            name="user"
+                                            value="{{request.user.id}}"/>
+                                    <div class="invalid-feedback">
+                                        {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Datos personales:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" value="{{request.user.first_name}}"  readonly placeholder="Nombre">
+                                            </div>
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" value="{{request.user.last_name}}"  readonly placeholder="Apellido">
+                                            </div>
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" value="{{request.user.profile.celular}}"  readonly>
+                                            </div>
+
+                                            <div class="input-group col-md-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                                </div>
+                                                <input type="email" class="form-control" value="{{request.user.email}}"  readonly >
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Departamento / Rol:</label>
+                                        <div class="row">
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Departamento" value="{{request.user.profile.departamento}}"  readonly>
+                                            </div>
+
+                                            <div class="input-group col-md-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Rol" value="{{request.user.profile.rol}}"  readonly>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Datos de Usuario-->
+
+        <hr size="2px" style="color: #000000;"/>
+
+        <!-- Main content -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <section class="content">
+            <div class="container-fluid">
+                <!-- /.card -->
+                <div class="row">
+                    <!-- Prime columna 1/2-->
+                    <div class="col-md-6">
+
+                        <!--  Datos de Muestreo-->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Muestreo</h3>
+                                {# user field #}
+                                <input
+                                        class="form-control {% if form.user.errors %}is-invalid{% endif %}"
+                                        type="hidden"
+                                        name="user"
+                                        value="{{request.user.id}}"/>
+                                <div class="invalid-feedback">
+                                    {% for error in form.user.errors %}{{ error }}{% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <label>Est. de Muestreo:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Unidad de Muestreo:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Metodo de Muestreo:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            {# estacion_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.estacion_muestreo.errors %}is-invalid{% endif %}"
+                                                   style="text-transform:uppercase;"
+                                                    name="estacion_muestreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.estacion_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# unidad_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_muestreo.errors %}is-invalid{% endif %}"
+                                                   style="text-transform:uppercase;"
+                                                   name="unidad_muestreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# metodo_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.metodo_muestreo.errors %}is-invalid{% endif %}"
+                                                   style="text-transform:uppercase;"
+                                                   name="metodo_muestreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.metodo_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Unidad de muestreo / Marca de Dedos / Periodo del dia:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-chart-bar"></i></span>
+                                            </div>
+                                            {# tamaño_unidad_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.tamaño_unidad_muestreo.errors %}is-invalid{% endif %}"
+                                                   placeholder="Tamaño"
+                                                    name="tamaño_unidad_muestreo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.tamaño_unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-hand-paper"></i></span>
+                                            </div>
+                                            {# chip_marca_dedos field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.chip_marca_dedos.errors %}is-invalid{% endif %}"
+                                                   placeholder="Marca"
+                                                   name="chip_marca_dedos"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.chip_marca_dedos.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-sun"></i></span>
+                                            </div>
+                                            {# periodo_dia field #}
+                                            <select class="custom-select rounded-0"
+                                                    name="periodo_dia"/>
+                                                <option value="-">Seleccionar</option>
+                                                <option value="Diurno">Diurno</option>
+                                                <option value="Tarde">Tarde</option>
+                                                <option value="Nocturno">Nocturno</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Evaluacion: Hora de Inicio / Hora finalizacion / Hora de Registro</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                            </div>
+                                            {# hora_inicio_evaluacion field #}
+                                            <input type="time"
+                                                   class="form-control {% if form.hora_inicio_evaluacion.errors %}is-invalid{% endif %}"
+                                                   name="hora_inicio_evaluacion"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.hora_inicio_evaluacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                            </div>
+                                            {# hora_finalizacion_evaluacion field #}
+                                            <input type="time"
+                                                   class="form-control {% if form.hora_finalizacion_evaluacion.errors %}is-invalid{% endif %}"
+                                                   name="hora_finalizacion_evaluacion"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.hora_finalizacion_evaluacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                            </div>
+                                            {# hora_registro field #}
+                                            <input type="time"
+                                                   class="form-control {% if form.hora_registro.errors %}is-invalid{% endif %}"
+                                                   name="hora_registro"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.hora_registro.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos de Muestreo -->
+
+                        <!-- Datos de Habitad -->
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de Habitad</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Fuente de clasificación taxonomica:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-binoculars"></i></span>
+                                        </div>
+                                        {# fuente_clasificacion_taxonomica field #}
+                                        <input type="text"
+                                               class="form-control {% if form.fuente_clasificacion_taxonomica.errors %}is-invalid{% endif %}"
+                                               name="fuente_clasificacion_taxonomica"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.fuente_clasificacion_taxonomica.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Coordenadas:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>X</b></span>
+                                            </div>
+                                            {# x field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.x.errors %}is-invalid{% endif %}"
+                                                   name="x"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.x.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><b>Y</b></span>
+                                            </div>
+                                            {# y field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.y.errors %}is-invalid{% endif %}"
+                                                   name="y"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.y.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Proyeccion / Altitud (MSNM):</label>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-binoculars"></i></span>
+                                            </div>
+                                            {# proyeccion field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.proyeccion.errors %}is-invalid{% endif %}"
+                                                   name="proyeccion"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.proyeccion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-water"></i></span>
+                                            </div>
+                                            {# altitud_msnm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.altitud_msnm.errors %}is-invalid{% endif %}"
+                                                   name="altitud_msnm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.altitud_msnm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Datum:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+                                        </div>
+                                        {# datum field #}
+                                        <input type="text"
+                                               style="text-transform:uppercase;"
+                                               class="form-control {% if form.datum.errors %}is-invalid{% endif %}"
+                                                name="datum"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.datum.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>T° del Ambiente / T° del Suelo:</label>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-thermometer-half"></i></span>
+                                            </div>
+                                            {# temperatura_ambiente field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.temperatura_ambiente.errors %}is-invalid{% endif %}"
+                                                   placeholder="C°"
+                                                   name="temperatura_ambiente"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.temperatura_ambiente.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-thermometer-half"></i></span>
+                                            </div>
+                                            {# temperatura_suelo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.temperatura_suelo.errors %}is-invalid{% endif %}"
+                                                   placeholder="C°"
+                                                   name="temperatura_suelo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.temperatura_suelo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Profundidad de Hojarasca / Temperie:</label>
+
+                                    <div class="row">
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-canadian-maple-leaf"></i></span>
+                                            </div>
+                                            {# profundidad_hojarrasca_cm field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.profundidad_hojarrasca_cm.errors %}is-invalid{% endif %}"
+                                                   name="profundidad_hojarrasca_cm"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.profundidad_hojarrasca_cm.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-smog"></i></span>
+                                            </div>
+                                            {# temperie field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.temperie.errors %}is-invalid{% endif %}"
+                                                   name="temperie"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.temperie.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Datos Habitad -->
+
+                        <!-- Caracteristicas del Anfibio o Reptil -->
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Caracteristicas del Anfibio o Reptil</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Peso / Sexo:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-weight-hanging"></i></span>
+                                            </div>
+                                            {# peso field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.peso.errors %}is-invalid{% endif %}"
+                                                   name="peso"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.peso.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-venus-mars"></i></span>
+                                            </div>
+                                            {# sexo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.sexo.errors %}is-invalid{% endif %}"
+                                                   name="sexo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.sexo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <label>Longitud total:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Longitud anohocico:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Longitud de cola:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            {# longitud field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.longitud.errors %}is-invalid{% endif %}"
+                                                   placeholder="(cm)"
+                                                   name="longitud"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.longitud.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# longitud_ano_hocico field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.longitud_ano_hocico.errors %}is-invalid{% endif %}"
+                                                   placeholder="(cm)"
+                                                   name="longitud_ano_hocico"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.longitud_ano_hocico.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# longitud_cola_lagartijas_serpientes field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.longitud_cola_lagartijas_serpientes.errors %}is-invalid{% endif %}"
+                                                   placeholder="(cm)"
+                                                   name="longitud_cola_lagartijas_serpientes"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.longitud_cola_lagartijas_serpientes.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <label>tipo Reproducción:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Longitud anohocico:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Longitud de cola:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            {# tipo_reproduccion_anfibios field #}
+                                            <select class="custom-select rounded-0"
+                                                    name="tipo_reproduccion_anfibios"/>
+                                                <option value="-">Seleccionar</option>
+                                                <option value="Directa">Directa</option>
+                                                <option value="Oviapro">Oviparo</option>
+                                                <option value="Viviparo">Viviparo</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <input type="number" class="form-control" placeholder="(cm)">
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <input type="number" class="form-control" placeholder="(cm)">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Conducta Social / Territorialidad / Hábito:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-ethernet"></i></span>
+                                            </div>
+                                            {# conducta_social field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.conducta_social.errors %}is-invalid{% endif %}"
+                                                   placeholder="Tamaño"
+                                                   name="conducta_social"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.conducta_social.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-chart-area"></i></span>
+                                            </div>
+                                            {# territorialidad field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.territorialidad.errors %}is-invalid{% endif %}"
+                                                   placeholder="Marca"
+                                                   name="territorialidad"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.territorialidad.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-sun"></i></span>
+                                            </div>
+                                            {# habito field #}
+                                            <select class="custom-select rounded-0"
+                                                    name="habito"/>
+                                                <option value="-">Seleccionar</option>
+                                                <option value="Diurno">Diurno</option>
+                                                <option value="Tarde">Tarde</option>
+                                                <option value="Nocturno">Nocturno</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Caracteristicas del Anfibio o Reptil -->
+
+                        <!-- Clasificaciones Generales -->
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Clasificaciones Generales</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <label>DS O34-2004-AG:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>IUCN:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>CITES:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            {# DSO342004AG field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.DSO342004AG.errors %}is-invalid{% endif %}"
+                                                   style="text-transform: uppercase;"
+                                                    name="DSO342004AG"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.DSO342004AG.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# IUCN field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.IUCN.errors %}is-invalid{% endif %}"
+                                                   style="text-transform: uppercase;"
+                                                   name="IUCN"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.IUCN.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# CITES field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.CITES.errors %}is-invalid{% endif %}"
+                                                   name="CITES"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.CITES.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <label>Uso potencial:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <label>Observaciones del registro:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# uso_potencial field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.uso_potencial.errors %}is-invalid{% endif %}"
+                                                   name="uso_potencial"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.uso_potencial.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            {# observaciones_registro field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.observaciones_registro.errors %}is-invalid{% endif %}"
+                                                   name="observaciones_registro"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.observaciones_registro.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Actividad Humana:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hiking"></i></span>
+                                        </div>
+                                        {# actividad_humana field #}
+                                        <input type="text"
+                                               class="form-control {% if form.actividad_humana.errors %}is-invalid{% endif %}"
+                                               name="actividad_humana"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.actividad_humana.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Estado de conservacion de Habitad:</label>
+                                    {# estado_conservacion_habitat field #}
+                                    <select class="custom-select rounded-0"
+                                            name="estado_conservacion_habitat"/>
+                                        <option value="-">Seleccionar</option>
+                                        <option value="Impactado">Impactado</option>
+                                        <option value="Regular">Regular</option>
+                                        <option value="Bueno">Bueno</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /Clasificaciones Generales -->
+
+                    </div>
+                    <!-- /Prime columna 1/2 -->
+
+                    <!-- Prime columna 2/2-->
+                    <div class="col-md-6">
+
+                        <!-- Card Datos del Proyecto-->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos de proyecto</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Codigo de Proyecto / Fecha de Registro:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
+                                            </div>
+                                            {# codigo_proyecto field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.codigo_proyecto.errors %}is-invalid{% endif %}"
+                                                   placeholder="##"
+                                                   name="codigo_proyecto"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.codigo_proyecto.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group date col-md-6" id="reservationdate" data-target-input="nearest">
+                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fas fa-calendar-alt"></i></div>
+                                            </div>
+                                            {# fecha_registro field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.fecha_registro.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   data-target="#reservationdate"
+                                                   name="fecha_registro"
+                                                   placeholder="dd/mm/yyyy"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.fecha_registro.errors %}{{ error }}{% endfor %}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Codigo de Proyecto:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Temporada de Evalucion / Unidad de vegetación:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            {# temporada_evaluacion field #}
+                                            <select class="custom-select rounded-0 col-md-6"
+                                                    id="exampleSelectRounded"
+                                                    name="temporada_evaluacion">
+                                                <option value="-">Seleccionar</option>
+                                                <option value="Seca">Seca</option>
+                                                <option value="Humedo">Humedo</option>
+                                                <option value="Nevado">Nevado</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fab fa-pagelines"></i></span>
+                                            </div>
+                                            {# unidad_vegetacion_quebrada field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.unidad_vegetacion_quebrada.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="unidad_vegetacion_quebrada"
+                                                   placeholder="QUEBRADA"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.unidad_vegetacion_quebrada.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            <label>Sector:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Cód. de la Quebrada:</label>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            <label>Disciplina Biológica:</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-group col-md-4">
+                                            {# sector field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.sector.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="sector"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.sector.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# codigo_quebrada field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.codigo_quebrada.errors %}is-invalid{% endif %}"
+                                                   name="codigo_quebrada"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.codigo_quebrada.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-4">
+                                            {# disciplina_biologica field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.disciplina_biologica.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="disciplina_biologica"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.disciplina_biologica.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Datos del Proyecto -->
+
+                        <!-- Card Datos generales del Anfibio o Reptil-->
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos generales del anfibio o Reptil</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Familia:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# familia field #}
+                                        <input type="text"
+                                               class="form-control {% if form.familia.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="familia"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.familia.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Especie:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                        </div>
+                                        {# especie field #}
+                                        <input type="text"
+                                               class="form-control {% if form.especie.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="especie"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.especie.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Nombre Comun / Nombre Local:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# nombre_comun field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.nombre_comun.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="nombre_comun"
+                                                   placeholder="Nom. Comun"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.nombre_comun.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# nombre_local field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.nombre_local.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="nombre_local"
+                                                   placeholder="Nom. Local"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.nombre_local.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Datos generales del Anfibio o Reptil -->
+
+                        <!-- Card Caracteristicas generales de Registro -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Caracteristicas generales de Registro</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Distancia perpendicular / Altura del registro:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-ruler-combined"></i></span>
+                                            </div>
+                                            {# distancia_perpendicular_unidad_muestreo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.distancia_perpendicular_unidad_muestreo.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="distancia_perpendicular_unidad_muestreo"
+                                                   placeholder="Unidad de Muestreo(cm)"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.distancia_perpendicular_unidad_muestreo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-ruler-combined"></i></span>
+                                            </div>
+                                            {# altura_registro_distancia_vertical_suelo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.altura_registro_distancia_vertical_suelo.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="altura_registro_distancia_vertical_suelo"
+                                                   placeholder="Dist. Vertical al Suelo(cm)"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.altura_registro_distancia_vertical_suelo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tipo de Evaluacion / Tipo de registro:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-ruler-combined"></i></span>
+                                            </div>
+                                            {# tipo_evaluacion field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.tipo_evaluacion.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="tipo_evaluacion"
+                                                   style="text-transform:uppercase;"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.tipo_evaluacion.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-ruler-combined"></i></span>
+                                            </div>
+                                            {# tipo_registro field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.tipo_registro.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="tipo_registro"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.tipo_registro.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>N° Registro por captura / Estado del hallazgo:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# numero_registro_captura field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.numero_registro_captura.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="numero_registro_captura"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.numero_registro_captura.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# estado_hallazgo field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.estado_hallazgo.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="estado_hallazgo"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.estado_hallazgo.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Comportamiento del individuo registrado / Nº total de individuos:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# etologia_comportamiento_individuo_registrado field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.etologia_comportamiento_individuo_registrado.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="etologia_comportamiento_individuo_registrado"
+                                                   placeholder="Etologia"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.etologia_comportamiento_individuo_registrado.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                            </div>
+                                            {# numero_total_individuos field #}
+                                            <input type="number"
+                                                   class="form-control {% if form.numero_total_individuos.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="numero_total_individuos"
+                                                   placeholder="0"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.numero_total_individuos.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Caracteristicas generales de Registro -->
+
+                        <!-- Card Caracteristicas Secundarias del Anfibio o Reptil -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Caracteristicas Secundarias del Anfibio o Reptil</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>Tipo de Hábitat:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# tipo_habitat_in_situ field #}
+                                        <input type="text"
+                                               class="form-control {% if form.tipo_habitat_in_situ.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="tipo_habitat_in_situ"
+                                               placeholder="insitu"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.tipo_habitat_in_situ.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Micro-habitat:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# micro_habitat_in_situ field #}
+                                        <input type="text"
+                                               class="form-control {% if form.micro_habitat_in_situ.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="micro_habitat_in_situ"
+                                               placeholder="insitu"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.micro_habitat_in_situ.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Plantas dominante del microhabitat:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# planta_dominante_microhabitat_in_situ field #}
+                                        <input type="text"
+                                               class="form-control {% if form.planta_dominante_microhabitat_in_situ.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="planta_dominante_microhabitat_in_situ"
+                                               placeholder="insitu"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.planta_dominante_microhabitat_in_situ.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Grupo Trófico / Registro de dieta:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-otter"></i></span>
+                                            </div>
+                                            {# grupo_trofico field #}
+                                            <select class="custom-select rounded-0 col-md-6"
+                                                    name="grupo_trofico">
+                                                <option value="-">Seleccionar</option>
+                                                <option value="Insectivoro">Insectivoro</option>
+                                                <option value="Carnivoro">Carnivoro</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                            </div>
+                                            {# registro_dieta_in_situ field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.registro_dieta_in_situ.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="registro_dieta_in_situ"
+                                                   placeholder="insitu"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.registro_dieta_in_situ.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Especie Endémica</label>
+
+                                    <div class="form-group">
+                                        <div class="row ml-1">
+
+                                            <div class="custom-control custom-radio col-md-6">
+                                                {# especie_endemica field #}
+                                                <input class="form-control {% if form.especie_endemica.errors %}is-invalid{% endif %} custom-control-input"
+                                                       type="radio"
+                                                       id="customRadio1"
+                                                       name="especie_endemica" checked/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.especie_endemica.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                                <label for="customRadio1" class="custom-control-label">Si</label>
+                                            </div>
+                                            <div class="custom-control custom-radio col-md-6">
+                                                {# especie_endemica field #}
+                                                <input class="form-control {% if form.especie_endemica.errors %}is-invalid{% endif %} custom-control-input"
+                                                       type="radio"
+                                                       id="customRadio2"
+                                                       name="especie_endemica" checked/>
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.especie_endemica.errors %}{{ error }}{% endfor %}
+                                                </div>
+                                                <label for="customRadio2" class="custom-control-label">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Nivel de Endemismo:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                        </div>
+                                        {# nivel_endemismo field #}
+                                        <input type="text"
+                                               class="form-control {% if form.nivel_endemismo.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="nivel_endemismo"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.nivel_endemismo.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Distribución de especies endémicas:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                        </div>
+                                        {# distribucion_especie_endemica field #}
+                                        <input type="text"
+                                               class="form-control {% if form.distribucion_especie_endemica.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="distribucion_especie_endemica"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.distribucion_especie_endemica.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Caracteristicas Secundarias del Anfibio o Reptil -->
+
+                    </div>
+                    <!-- /Prime columna 2/2 -->
+
+                </div>
+
+                <div class="row" style="justify-content: center">
+                    <div class="col-md-6">
+                        <!-- Card Otros -->
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">Otros</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label>distancia al componente minero:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# distancia_componente_minero field #}
+                                        <input type="text"
+                                               class="form-control {% if form.distancia_componente_minero.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="distancia_componente_minero"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.distancia_componente_minero.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Control de Ingreso Biologico:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# medida_control_impedir_ingreso field #}
+                                        <input type="text"
+                                               class="form-control {% if form.medida_control_impedir_ingreso.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="medida_control_impedir_ingreso"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.medida_control_impedir_ingreso.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Micro-habitat:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# micro_habitat field #}
+                                        <input type="text"
+                                               class="form-control {% if form.micro_habitat.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="micro_habitat"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.micro_habitat.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Daño de Instalaciones / Riesgo de contacto animal-instalacion:</label>
+                                    <div class="row">
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                            </div>
+                                            {# animal_instalaciones field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.animal_instalaciones.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="animal_instalaciones"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.animal_instalaciones.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col-md-6">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                            </div>
+                                            {# riesgo_contacto_animal_instalaciones field #}
+                                            <input type="text"
+                                                   class="form-control {% if form.riesgo_contacto_animal_instalaciones.errors %}is-invalid{% endif %} datetimepicker-input"
+                                                   name="riesgo_contacto_animal_instalaciones"/>
+                                            <div class="invalid-feedback">
+                                                {% for error in form.riesgo_contacto_animal_instalaciones.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Observaciones:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-campground"></i></span>
+                                        </div>
+                                        {# observaciones_animales_muertos field #}
+                                        <input type="text"
+                                               class="form-control {% if form.observaciones_animales_muertos.errors %}is-invalid{% endif %} datetimepicker-input"
+                                               name="observaciones_animales_muertos"/>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.observaciones_animales_muertos.errors %}{{ error }}{% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /Card Otros -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Enviar Los Datos</h3>
+                            </div>
+                            <div class="card-body">
+                                <center><button class="btn btn-primary col-lg-6" type="submit" >Enviar</button></center>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                Gracias por llenar el formulario.
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        </form>
+
+    </div>
+    <!-- /.content-wrapper -->
+    {% include "footer.html" %}
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+{% block javascript %}
+<script src="/static/admin-lte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="/static/admin-lte/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src=/static/admin-lte/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/static/admin-lte/plugins/moment/moment.min.js"></script>
+<script src="/static/admin-lte/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/static/admin-lte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/static/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/static/admin-lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/static/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/static/admin-lte/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/static/admin-lte/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/admin-lte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/static/admin-lte/dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script src="/static/admin/js/fecha.js"></script>
+{% endblock %}
+</body>
+</html>
